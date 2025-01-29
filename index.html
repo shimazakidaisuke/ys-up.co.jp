@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>承認申請</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .approval-container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; }
+        .step { margin: 10px 0; padding: 10px; border-bottom: 1px solid #ddd; }
+        .approve-btn, .reject-btn { margin: 5px; padding: 5px 10px; cursor: pointer; }
+        .comment-box { width: 100%; height: 60px; margin-top: 10px; }
+    </style>
+    <script>
+        function sendEmail() {
+            const comment = document.querySelector('.comment-box').value;
+            if (!comment.trim()) {
+                alert("申請内容を入力してください。");
+                return;
+            }
+            const subject = encodeURIComponent("新しい申請が届きました");
+            const body = encodeURIComponent(`申請者: 板倉京佑\n申請内容: ${comment}`);
+            const recipient = "shimazakidaisuke@ys-up.co.jp"; // 承認者のメールアドレスに変更してください
+            
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        }
+        
+        function notifyApproval() {
+            const subject = encodeURIComponent("申請が承認されました");
+            const body = encodeURIComponent("申請が承認されました。");
+            const recipient = "k.itakura@ys-up.co.jp"; // 申請者のメールアドレスに変更してください
+            
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="approval-container">
+        <h2>承認フロー</h2>
+        <div class="step">
+            <p>申請者: 板倉京佑</p>
+            <textarea class="comment-box" placeholder="申請内容を入力してください..."></textarea>
+            <button class="approve-btn" onclick="sendEmail()">申請</button>
+        </div>
+        <div class="step">
+            <p>承認者: 嶋﨑　大輔</p>
+            <button class="approve-btn" onclick="notifyApproval()">承認</button>
+            <button class="reject-btn">却下</button>
+        </div>
+    </div>
+</body>
+</html>
