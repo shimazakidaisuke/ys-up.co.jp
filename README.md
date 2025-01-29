@@ -1,1 +1,1 @@
-# ys-up.co.jp
+ys-up
